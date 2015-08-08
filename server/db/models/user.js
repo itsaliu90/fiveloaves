@@ -12,6 +12,12 @@ var schema = new mongoose.Schema({
     salt: {
         type: String
     },
+    phone: {
+        type: String
+    },
+    preferredZipCodes: {
+        type: [String]
+    },
     twitter: {
         id: String,
         username: String,
