@@ -31,6 +31,22 @@ app.use(function (req, res, next) {
 
 app.get('/*', function (req, res) {
     res.sendFile(app.get('indexHTMLPath'));
+
+    var accountSid = 'ACd2695be19b1e72ebf889d3e9486724cc';
+    var authToken = "580c484308c9e73e9421068a04505559";
+    var client = require('twilio')(accountSid, authToken);
+     
+    client.messages.create({
+        body: "Wassup Norm!",
+        to: "+16503031192",
+        from: "+16193562837"
+    }, function(err, message) {
+        console.log("Message Sent");
+        if (err) {
+        	console.log(err);
+    	}
+    });
+
 });
 
 // Error catching endware.
