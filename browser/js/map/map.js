@@ -6,17 +6,22 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('MapController', function ($scope) {
+app.controller('MapController', function ($scope, leafletData, leafletBoundsHelpers) {
+    var bounds = leafletBoundsHelpers.createBoundsFromArray([
+                [ 40.7127, -74.0059 ],
+                [ 40.753556, -73.989926 ]
+            ]);
     angular.extend($scope, {
-        center: {
-            lat: 40.7127,
-            lng: -74.0059,
-            zoom: 14
-        },
+        bounds: bounds,
+        center: {},
         markers: {
             nyc: {
                 lat: 40.7127,
                 lng: -74.0059,
+            },
+            midtown: {
+                lat: 40.753556,
+                lng: -73.989926,
             }
         },
         layers: {

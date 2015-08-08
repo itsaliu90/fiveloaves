@@ -29,7 +29,7 @@ fullstack-logo {
 
 navbar {
   display: block;
-  background: #8fa15f;
+  background: rgba(143, 161, 95, 0.6);
   position: relative;
   z-index: 120; }
   navbar .container {
