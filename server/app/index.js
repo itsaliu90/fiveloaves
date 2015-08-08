@@ -6,7 +6,29 @@ var secrets = require('../../secrets.js');
 module.exports = app;
 var secrets = require('../../secrets.js');
 var mongoose = require('mongoose');
+
+// Mongoose models
+var Organization = mongoose.model('Organization');
 var User = mongoose.model('User');
+var Post = mongoose.model('Post');
+
+// Twilio SMS function
+function sendSMSforPost(recipientPhoneNumber, postDescription) {
+	var accountSid = 'ACd2695be19b1e72ebf889d3e9486724cc';
+	var authToken = secrets.twilioAuthToken;
+	var client = require('twilio')(accountSid, authToken);
+	 
+	client.messages.create({
+	    body: postDescription,
+	    to: recipientPhoneNumber,
+	    from: "+16193562837"
+	}, function(err, message) {
+	    console.log("Message Sent");
+	    if (err) {
+	    	console.log(err);
+		}
+	});
+}
 
 // Pass our express application pipeline into the configuration
 // function located at server/app/configure/index.js
@@ -41,24 +63,30 @@ app.get('/zipcode', function (req, res) {
         })
 })
 
+app.get('/post', function (req, res) {
+    var post = new Post({
+    	organization: "55c6899e9d0074e0698628ee",
+    	description: "Ice cream is here!!!"
+    })
+
+    // Query Organization related to Post based on ID
+    Organization.find({_id: post.organization})
+    // Query Users based on Organization zip code
+    .then(function(organization){
+    	User.getUsersByPreferredZipCode(organization[0].zipCode)
+    	.then(function(users) {
+    // Iterate through users and send texts, passing in To, Description (Post), Location (Organization)
+    		for (var i = 0; i < users.length; i++) {
+    			console.log("CURRENT USER", users[i]);
+    			sendSMSforPost(users[i].phone, post.description + organization[0].address);
+    		}
+        })
+    })
+})
+
 app.get('/', function (req, res) {
     res.sendFile(app.get('indexHTMLPath'));
-
-    var accountSid = 'ACd2695be19b1e72ebf889d3e9486724cc';
-    var authToken = secrets.twilioAuthToken;
-    var client = require('twilio')(accountSid, authToken);
-     
-    client.messages.create({
-        body: "Wassup Norm!",
-        to: "+16503031192",
-        from: "+16193562837"
-    }, function(err, message) {
-        console.log("Message Sent");
-        if (err) {
-        	console.log(err);
-    	}
-    });
-
+    sendSMSforPost("+16503031192", "Wassup Norm!");
 });
 
 // Error catching endware.
