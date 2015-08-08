@@ -1,7 +1,9 @@
 navbar {
 
   display: block;
-  background: none;
+  background: rgba(143,161,95,1);
+  position: relative;
+  z-index: 120;
 
   .container {
     width: 91%;

@@ -3,7 +3,9 @@
 
 html, body {
   height: 100%;
-  min-height: 100%; }
+  min-height: 100%;
+  margin: 0;
+  padding: 0; }
 
 body {
   background: #fdfdfd; }
@@ -27,7 +29,9 @@ fullstack-logo {
 
 navbar {
   display: block;
-  background: none; }
+  background: #8fa15f;
+  position: relative;
+  z-index: 120; }
   navbar .container {
     width: 91%;
     max-width: 1340px;
@@ -145,3 +149,12 @@ tutorial-section-menu {
 #login-form {
   width: 60%;
   margin: 0 auto; }
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%; }
+
+.leaflet-control-container div:nth-child(2) {
+  display: none; }

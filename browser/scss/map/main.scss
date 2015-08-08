@@ -1,3 +1,9 @@
 #map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
     width: 100%;
+}
+.leaflet-control-container div:nth-child(2) {
+    display: none;
 }
