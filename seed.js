@@ -27,13 +27,34 @@ var seedUsers = function () {
 
     var users = [
         {
-            email: 'testing@fsa.com',
-            password: 'password'
+            email: 'yuningalexliu@gmail.com',
+            password: 'password',
+            phone: '+15856629096',
+            preferredZipCodes: ['10023']
+
         },
         {
-            email: 'obama@gmail.com',
-            password: 'potus'
-        }
+            email: 'chou.norm@gmail.com',
+            password: 'password',
+            phone: '+16503031192',
+            preferredZipCodes: ['10023']
+
+        },
+                {
+            email: 'victoratteh@gmail.com',
+            password: 'password',
+            phone: '+16027381559',
+            preferredZipCodes: ['10018']
+
+        },
+        {
+            email: 'nogever@gmail.com',
+            password: 'password',
+            phone: '+19148445238',
+            preferredZipCodes: ['10018']
+
+        },
+
     ];
 
     return User.createAsync(users);
