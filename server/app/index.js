@@ -3,6 +3,7 @@ var path = require('path');
 var express = require('express');
 var app = express();
 module.exports = app;
+var secrets = require('../../secrets.js');
 
 // Pass our express application pipeline into the configuration
 // function located at server/app/configure/index.js
@@ -31,6 +32,22 @@ app.use(function (req, res, next) {
 
 app.get('/*', function (req, res) {
     res.sendFile(app.get('indexHTMLPath'));
+
+    var accountSid = 'ACd2695be19b1e72ebf889d3e9486724cc';
+    var authToken = secrets.twilioAuthToken;
+    var client = require('twilio')(accountSid, authToken);
+     
+    client.messages.create({
+        body: "Wassup Norm!",
+        to: "+16503031192",
+        from: "+16193562837"
+    }, function(err, message) {
+        console.log("Message Sent");
+        if (err) {
+        	console.log(err);
+    	}
+    });
+
 });
 
 // Error catching endware.
