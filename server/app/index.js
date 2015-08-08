@@ -5,6 +5,8 @@ var app = express();
 var secrets = require('../../secrets.js');
 module.exports = app;
 var secrets = require('../../secrets.js');
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
 
 // Pass our express application pipeline into the configuration
 // function located at server/app/configure/index.js
@@ -31,7 +33,19 @@ app.use(function (req, res, next) {
 
 });
 
-app.get('/*', function (req, res) {
+
+app.get('/zipcode', function (req, res) {
+
+    User.find({ preferredZipCodes: '10018'}).exec(function(err, users) {
+        if (err) return err;
+        console.log(users)
+        res.json(users);
+    });
+
+
+})
+
+app.get('/', function (req, res) {
     res.sendFile(app.get('indexHTMLPath'));
 
     var accountSid = 'ACd2695be19b1e72ebf889d3e9486724cc';
