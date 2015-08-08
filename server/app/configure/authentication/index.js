@@ -48,7 +48,10 @@ module.exports = function (app) {
     app.get('/session', function (req, res) {
         if (req.user) {
             res.send({ user: _.omit(req.user.toJSON(), ['salt', 'password']) });
+        } else if (req.organization) {
+            res.send({ user: _.omit(req.organization.toJSON(), ['salt', 'password']) });
         } else {
+            console.log('here!!!!!!');
             res.status(401).send('No authenticated user.');
         }
     });
