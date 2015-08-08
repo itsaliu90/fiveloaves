@@ -4,6 +4,7 @@ var express = require('express');
 var app = express();
 var secrets = require('../../secrets.js');
 module.exports = app;
+var secrets = require('../../secrets.js');
 
 // Pass our express application pipeline into the configuration
 // function located at server/app/configure/index.js
