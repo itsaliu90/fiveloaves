@@ -32,6 +32,14 @@ var schema = new mongoose.Schema({
     }
 });
 
+
+schema.statics.getUsersByPreferredZipCode = function(zipcode) {
+    return mongoose.model('User').find({ preferredZipCodes: zipcode}).exec()
+}
+
+
+
+
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
 // are all used for local authentication security.
 var generateSalt = function () {
@@ -62,5 +70,8 @@ schema.statics.encryptPassword = encryptPassword;
 schema.method('correctPassword', function (candidatePassword) {
     return encryptPassword(candidatePassword, this.salt) === this.password;
 });
+
+
+
 
 mongoose.model('User', schema);
