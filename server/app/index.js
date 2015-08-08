@@ -35,14 +35,10 @@ app.use(function (req, res, next) {
 
 
 app.get('/zipcode', function (req, res) {
-
-    User.find({ preferredZipCodes: '10018'}).exec(function(err, users) {
-        if (err) return err;
-        console.log(users)
-        res.json(users);
-    });
-
-
+    User.getUsersByPreferredZipCode('10018')
+        .then(function(users){
+            res.json(users)
+        })
 })
 
 app.get('/', function (req, res) {

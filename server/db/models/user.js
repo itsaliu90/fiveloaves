@@ -34,15 +34,7 @@ var schema = new mongoose.Schema({
 
 
 schema.statics.getUsersByPreferredZipCode = function(zipcode) {
-    mongoose.model('User').find({ preferredZipCodes: '10018'}).exec(function(err, users) {
-        if (err) return err;
-        console.log(users)
-        return users;
-    });
-   
-    // User.find({
-    //     'preferredZipCodes': { $in: zipcode }
-    // }).exec();
+    return mongoose.model('User').find({ preferredZipCodes: zipcode}).exec()
 }
 
 
