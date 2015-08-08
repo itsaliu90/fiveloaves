@@ -2,6 +2,7 @@
 var path = require('path');
 var express = require('express');
 var app = express();
+var secrets = require('../../secrets.js');
 module.exports = app;
 
 // Pass our express application pipeline into the configuration
@@ -33,7 +34,7 @@ app.get('/*', function (req, res) {
     res.sendFile(app.get('indexHTMLPath'));
 
     var accountSid = 'ACd2695be19b1e72ebf889d3e9486724cc';
-    var authToken = "580c484308c9e73e9421068a04505559";
+    var authToken = secrets.twilioAuthToken;
     var client = require('twilio')(accountSid, authToken);
      
     client.messages.create({
