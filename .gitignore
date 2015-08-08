@@ -1,6 +1,7 @@
 .idea
 node_modules
 npm-debug.log
-public
+public/main.js
+public/start.js
 .DS_Store
 coverage
