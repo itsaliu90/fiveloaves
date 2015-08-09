@@ -3,33 +3,21 @@ var path = require('path');
 var express = require('express');
 var app = express();
 var secrets = require('../../secrets.js');
-module.exports = app;
-var secrets = require('../../secrets.js');
 var mongoose = require('mongoose');
+var paypal = require('paypal-rest-sdk');
+module.exports = app;
+
+// Configure PayPal
+paypal.configure({
+  'mode': 'sandbox', //sandbox or live
+  'client_id': secrets.payPalClientId,
+  'client_secret': secrets.payPalClientSecret
+});
 
 // Mongoose models
-// var Organization = mongoose.model('Organization');
 var User = mongoose.model('User');
 var Registrant = mongoose.model('Registrant');
 var Post = mongoose.model('Post');
-
-// Twilio SMS function
-var sendSMSforPost = function(recipientPhoneNumber, postDescription) {
-	var accountSid = 'ACd2695be19b1e72ebf889d3e9486724cc';
-	var authToken = secrets.twilioAuthToken;
-	var client = require('twilio')(accountSid, authToken);
-	 
-	client.messages.create({
-	    body: postDescription,
-	    to: recipientPhoneNumber,
-	    from: "+16193562837"
-	}, function(err, message) {
-	    console.log("Message Sent");
-	    if (err) {
-	    	console.log(err);
-		}
-	});
-}
 
 // Pass our express application pipeline into the configuration
 // function located at server/app/configure/index.js
@@ -57,39 +45,60 @@ app.use(function (req, res, next) {
 });
 
 
-app.get('/zipcode', function (req, res) {
-    Registrant.getRegistrantsByZipCode('10018')
-        .then(function(users){
-            res.json(users)
-        })
+app.get('/paypal', function (req, res) {
+
+	console.log("HITTING PAYPAL ROUTE");
+
+	var create_payment_json = {
+	    "intent": "sale",
+	    "payer": {
+	        "payment_method": "credit_card",
+	        "funding_instruments": [{
+	            "credit_card": {
+	                "type": "visa",
+	                "number": "4417119669820331",
+	                "expire_month": "11",
+	                "expire_year": "2018",
+	                "cvv2": "874",
+	                "first_name": "Joe",
+	                "last_name": "Shopper",
+	                "billing_address": {
+	                    "line1": "52 N Main ST",
+	                    "city": "Johnstown",
+	                    "state": "OH",
+	                    "postal_code": "43210",
+	                    "country_code": "US"
+	                }
+	            }
+	        }]
+	    },
+	    "transactions": [{
+	        "amount": {
+	            "total": "7",
+	            "currency": "USD",
+	            "details": {
+	                "subtotal": "5",
+	                "tax": "1",
+	                "shipping": "1"
+	            }
+	        },
+	        "description": "This is the payment transaction description."
+	    }]
+	};
+
+	paypal.payment.create(create_payment_json, function (error, payment) {
+	    if (error) {
+	        throw error;
+	    } else {
+	        console.log("Create Payment Response");
+	        console.log(payment);
+	    }
+	});
+
 })
-
-
-
-// app.get('/post', function (req, res) {
-//     var post = new Post({
-//     	organization: "55c6899e9d0074e0698628ee",
-//     	description: "Ice cream is here!!!"
-//     })
-
-//     // Query Organization related to Post based on ID
-//     Organization.find({_id: post.organization})
-//     // Query Users based on Organization zip code
-//     .then(function(organization){
-//     	User.getUsersByPreferredZipCode(organization[0].zipCode)
-//     	.then(function(users) {
-//     // Iterate through users and send texts, passing in To, Description (Post), Location (Organization)
-//     		for (var i = 0; i < users.length; i++) {
-//     			console.log("CURRENT USER", users[i]);
-//     			sendSMSforPost(users[i].phone, post.description + organization[0].address);
-//     		}
-//         })
-//     })
-// })
 
 app.get('/', function (req, res) {
     res.sendFile(app.get('indexHTMLPath'));
-    sendSMSforPost("+16503031192", "Wassup Norm!");
 });
 
 // Error catching endware.
