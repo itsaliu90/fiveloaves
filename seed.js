@@ -56,35 +56,52 @@ var seedUsers = function () {
             preferredZipCodes: ['10018']
 
         },
+        {
+            email: 'nogever@gmail.com',
+            password: 'password',
+            phone: '+19148445238',
+            preferredZipCodes: ['10018']
 
+        },
+        {
+            email: 'yuningalexliu+alley@gmail.com',
+            password: 'password',
+            phone: '+15856629096',
+
+            //
+            organizationName: 'Alley NYC',
+            organizationAddress: '500 7th Ave',
+            organizationCity: 'New York',
+            organizationZipCode: '10018'
+        },
     ];
 
     return User.createAsync(users);
 
 };
 
-var seedOrganizations = function () {
+// var seedOrganizations = function () {
 
-    var organizations = [
-        {
-            name: 'Alley NYC',
-            password: 'password',
-            address: '500 7th Ave',
-            city: 'New York',
-            zipCode: '10018'
-        },
-        {
-            name: 'McDonald\'s',
-            password: 'password',
-            address: '2049 Broadway',
-            city: 'New York',
-            zipCode: '10023'
-        },
+//     var organizations = [
+//         {
+//             name: 'Alley NYC',
+//             password: 'password',
+//             address: '500 7th Ave',
+//             city: 'New York',
+//             zipCode: '10018'
+//         },
+//         {
+//             name: 'McDonald\'s',
+//             password: 'password',
+//             address: '2049 Broadway',
+//             city: 'New York',
+//             zipCode: '10023'
+//         },
 
-    ];
+//     ];
 
-    return Organization.createAsync(organizations);
-};
+//     return Organization.createAsync(organizations);
+// };
 
 connectToDb.then(function () {
     User.findAsync({}).then(function (users) {
