@@ -3,6 +3,8 @@ var crypto = require('crypto');
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
+
+    // User fields
     email: {
         type: String
     },
@@ -18,6 +20,37 @@ var schema = new mongoose.Schema({
     preferredZipCodes: {
         type: [String]
     },
+    isOrganization: {
+        type: Boolean
+    },
+
+    // Organization Fields (Optional)
+    organizationVerified: {
+        type: Boolean
+    },
+    organizationName: {
+        type: String
+    },
+    organizationAddress: {
+        type: String
+    },
+    organizationCity: {
+        type: String
+    },
+    organizationPhone: {
+        type: String
+    },
+    organizationZipCode: {
+        type: String
+    },
+    organizationTwitter: {
+        id: String,
+        username: String,
+        token: String,
+        tokenSecret: String
+    },
+
+    // Extra
     twitter: {
         id: String,
         username: String,
