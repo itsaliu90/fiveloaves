@@ -6,10 +6,12 @@
 
     <div id="results">
         <div class="tab" ng-class="tabIn"></div>
+        <h3 class="date">{{ now | date : 'MMM, d' }}</h3>
         <ul>
-            <li ng-repeat="r in markers">
-                <span class="company">{{ r.company }}</span>
-                <span class="address">{{ r.address }}</span>
+            <li ng-repeat="a in alerts">
+                <span class="company">{{ a.organizationName }}</span>
+                <span class="address">{{ a.address }}</span>
+                <span class="description">{{ a.description }}</span>
             </li>
         </ul>
     </div>

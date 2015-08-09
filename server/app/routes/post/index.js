@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var secrets = require('../../../../secrets.js');
 var Post = mongoose.model('Post');
 var Registrant = mongoose.model('Registrant');
+var moment = require('moment');
+moment().format();
 
 // Helper method to send SMS
 var sendSMS = function(recipientPhoneNumber, postDescription) {
@@ -24,7 +26,9 @@ var sendSMS = function(recipientPhoneNumber, postDescription) {
 }
 
 router.get('/', function(req, res, next) {
-	Post.find({}, function(err, data) {
+	var today = moment().startOf('day');
+	var tomorrow = moment(today).add(1, 'days');
+	Post.find({time: {$gte: today.toDate(), $lt: tomorrow.toDate()}}, function(err, data) {
 		res.json(data);
 	});
 });
