@@ -33,15 +33,6 @@ body {
   padding: 10px 40px;
 }
 
-#paypal {
-  background-image: url('./images/btn_donate_pp.png');
-  width: 140px;
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-}
-
-
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';

@@ -23,13 +23,6 @@ body {
 #main-container {
   padding: 10px 40px; }
 
-#paypal {
-  background-image: url('./images/btn_donate_pp.png');
-  width: 140px;
-  position: absolute;
-  right: 20px;
-  bottom: 20px; }
-
 fullstack-logo {
   display: block; }
   fullstack-logo img {
@@ -90,6 +83,14 @@ navbar {
     font-weight: 700;
     font-size: 48px;
     margin-bottom: 80px; }
+
+#donate {
+  text-align: center; }
+
+#paypal {
+  background-image: url('./images/btn_donate_pp.png');
+  width: 140px;
+  margin-top: 60px; }
 
 #about {
   margin: 0 auto;

@@ -10,24 +10,18 @@
 
 <!-- <input id="paypal" type="button" src="./paypal-button.min.js"> -->
 
-
 <script src="./paypal-button.min.js"
     data-button="donate"
     data-name="My product"
     data-amount="1.00"
     async
 ></script>
-
-
-
-
-<div ng-controller="ModalDemoCtrl">
+<div ng-controller="ModalDemoCtrl" id="donate">
     <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
             <h3 class="modal-title" style="text-align: center">Thank you for donating to fiveloaves</h3>
         </div>
         <div class="modal-body">
-
             <div class="form-group" style="padding-right: 70px; padding-left: 70px">
                 <label for="signup-name">Name</label><i class="bar"></i>
                 <input type="text" class="form-control" id="name" required>
