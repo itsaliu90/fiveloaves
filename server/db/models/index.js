@@ -3,4 +3,4 @@
 // anywhere the User model needs to be used.
 require('./user');
 require('./post');
-require('./organization');
+require('./registrant');

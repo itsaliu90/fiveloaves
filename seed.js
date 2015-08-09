@@ -21,102 +21,44 @@ var mongoose = require('mongoose');
 var Promise = require('bluebird');
 var chalk = require('chalk');
 var connectToDb = require('./server/db');
-var User = Promise.promisifyAll(mongoose.model('User'));
-var Organization = Promise.promisifyAll(mongoose.model('Organization'));
+var Registrant = Promise.promisifyAll(mongoose.model('Registrant'));
 
 
-var seedUsers = function () {
+var seedRegistrants = function () {
 
-    var users = [
+    var registrants = [
         {
-            email: 'yuningalexliu@gmail.com',
-            password: 'password',
             phone: '+15856629096',
-            preferredZipCodes: ['10023']
+            zipCodes: ['10023']
 
         },
         {
-            email: 'chou.norm@gmail.com',
-            password: 'password',
             phone: '+16503031192',
-            preferredZipCodes: ['10023']
+            zipCodes: ['10023']
 
         },
-                {
-            email: 'victoratteh@gmail.com',
-            password: 'password',
+        {
             phone: '+16027381559',
-            preferredZipCodes: ['10018']
+            zipCodes: ['10018']
 
         },
         {
-            email: 'nogever@gmail.com',
-            password: 'password',
             phone: '+19148445238',
-            preferredZipCodes: ['10018']
+            zipCodes: ['10018']
 
-        },
-        {
-            email: 'nogever@gmail.com',
-            password: 'password',
-            phone: '+19148445238',
-            preferredZipCodes: ['10018']
-
-        },
-        {
-            email: 'yuningalexliu+alley@gmail.com',
-            password: 'password',
-            phone: '+15856629096',
-
-            //
-            organizationName: 'Alley NYC',
-            organizationAddress: '500 7th Ave',
-            organizationCity: 'New York',
-            organizationZipCode: '10018'
-        },
+        }
     ];
 
-    return User.createAsync(users);
+    return Registrant.createAsync(registrants);
 
 };
 
-// var seedOrganizations = function () {
-
-//     var organizations = [
-//         {
-//             name: 'Alley NYC',
-//             password: 'password',
-//             address: '500 7th Ave',
-//             city: 'New York',
-//             zipCode: '10018'
-//         },
-//         {
-//             name: 'McDonald\'s',
-//             password: 'password',
-//             address: '2049 Broadway',
-//             city: 'New York',
-//             zipCode: '10023'
-//         },
-
-//     ];
-
-//     return Organization.createAsync(organizations);
-// };
-
 connectToDb.then(function () {
-    User.findAsync({}).then(function (users) {
-        if (users.length === 0) {
-            return seedUsers();
+    Registrant.findAsync({}).then(function (registrants) {
+        if (registrants.length === 0) {
+            return seedRegistrants();
         } else {
             console.log(chalk.magenta('Seems to already be user data, exiting!'));
-        }
-    }).then(function() {
-        return Organization.findAsync({});
-    }).then(function (organizations) {
-        if (organizations.length === 0) {
-            return seedOrganizations();
-        } else {
-            console.log(chalk.magenta('Seems to already be organization data, exiting!'));
         }
     }).then(function () {
         console.log(chalk.green('Seed successful!'));
