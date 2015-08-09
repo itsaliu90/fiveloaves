@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-md-offset-4 col-md-4">
+        
+        <form id="signup-form" name="signupForm" ng-submit="signupForm.$valid && sendSignup(signup)">
+            <h1 class="form-heading text-center">Sign up your organization</h1>
+
+            <alert type="danger" ng-show="error">
+                {{ error }}
+            </alert>
+
+            <div class="form-group">
+                <label for="signup-name">Organization Name</label><i class="bar"></i>
+                <input type="text" class="form-control" ng-model="signup.name" id="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="signup-email">Email address</label><i class="bar"></i>
+                <input type="text" class="form-control" ng-model="signup.email" id="email" required>
+                
+            </div>
+
+            <div class="form-group">
+                <label for="signup-password">Password</label><i class="bar"></i>
+                <input type="password" class="form-control" ng-model="signup.password" id="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="signup-phoneNumber">Phone Number</label><i class="bar"></i>
+                <input type="text" class="form-control" ng-model="signup.phoneNumber" id="phoneNumber" required>
+            </div>
+
+            <div class="form-group">
+                <label for="signup-address">Address</label><i class="bar"></i>
+                <input type="text" class="form-control" ng-model="signup.address" id="address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="signup-city">City</label><i class="bar"></i>
+                <input type="text" class="form-control" ng-model="signup.city" id="city" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-large btn-center">Submit</button>
+        </form>
+
+    </div>
+</div>
