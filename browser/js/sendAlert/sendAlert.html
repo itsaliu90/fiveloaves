@@ -1,7 +1,6 @@
-<div class="row">
-    <div class="col-md-offset-4 col-md-4">
-        
-        <form id="alert-form" name="sendAlertForm" ng-submit="sendAlert(alertInfo)" novalidate>
+<div class="container-fluid">
+    <div class="col-sm-offset-3 col-sm-6" id="alert-form">        
+        <form name="sendAlertForm" ng-submit="sendAlert(alertInfo)" novalidate>
             <h1 class="form-heading text-center">Notify recipients to pick up food</h1>
 
             <alert type="danger" ng-show="error">
@@ -19,7 +18,7 @@
 
             <button class="btn btn-default pull-left" ng-click="addImage()">Add Media</button>
 
-            <button type="submit" class="btn btn-primary btn-large btn-center">Send Alert</button>
+            <button type="submit" class="btn btn-primary btn-large btn-center pull-right">Send Alert</button>
         </form>
 
     </div>
