@@ -4,7 +4,6 @@ var _ = require('lodash');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-var Organization = mongoose.model('Organization');
 
 module.exports = function (app) {
 
@@ -15,18 +14,7 @@ module.exports = function (app) {
             .then(function (user) {
                 // user.correctPassword is a method from the User schema.
                 if (!user || !user.correctPassword(password)) {
-                    Organization.findOne({ name: email })
-                        .then(function (organization) {
-                            // organization.correctPassword is a method from the User schema.
-                            if (!organization || !organization.correctPassword(password)) {
-                                done(null, false);
-                            } else {
-                                // Properly authenticated.
-                                done(null, organization);
-                            }
-                        }, function (err) {
-                            done(err);
-                        });
+                    done(null, false);
                 } else {
                     // Properly authenticated.
                     done(null, user);
