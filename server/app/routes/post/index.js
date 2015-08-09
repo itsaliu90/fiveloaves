@@ -26,9 +26,9 @@ var sendSMS = function(recipientPhoneNumber, postDescription) {
 }
 
 router.get('/', function(req, res, next) {
-	var today = moment().startOf('day');
-	var tomorrow = moment(today).add(1, 'days');
-	Post.find({time: {$gte: today.toDate(), $lt: tomorrow.toDate()}}, function(err, data) {
+	var date12hrsAgo = new Date(new Date().getTime() - (12 * 60 * 60 * 1000));
+
+	Post.find({time: { $gte: date12hrsAgo}}, function(err, data) {
 		res.json(data);
 	});
 });
