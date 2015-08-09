@@ -16,6 +16,7 @@
     top: 71px;
     right: 0;
     background: white;
+    padding: 25px;
 
     .tab {
         position: absolute;
@@ -26,4 +27,40 @@
         top: 0;
         background: url(images/tab.png) no-repeat top left;
     }
+
+    ul, li {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+    .company {
+        font-size: 130%;
+        margin-right: 10px;
+    }
+    .address {
+        color: #bababa;
+        margin-right: 10px;
+    }
+    .date {
+        color: #8fa15f;
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+    .description {
+        display: block;
+        color: #898989;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
 }
+
+
+
+
+
+
+
+
+
+

@@ -106,16 +106,30 @@ app.controller('MapController', function ($scope, foodAlerts) {
             ]
         },
         {}
-    ];
+    ];  
     $scope.alerts = foodAlerts;
-    console.log('hi', $scope.alerts);
+    $scope.now = new Date();
+    $scope.markers = [];
     var geocoder = new google.maps.Geocoder();
-    $scope.address = "500 7th Ave 10018";
-    geocoder.geocode( { "address": $scope.address }, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
-            var location = results[0].geometry.location;
-            console.log(location);
-        }
+    $scope.alerts.forEach(function(alert, index) {
+        var address = alert.address + " " + alert.zipCode;
+        geocoder.geocode( { "address": address }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+                var location = results[0].geometry.location;
+                alert.location = {
+                    latitude: location.G,
+                    longitude: location.K,
+                    title: alert.organizationName,
+                    id: index,
+                    fit: true,
+                    options: {
+                        labelVisible: true
+                    }
+                }
+                $scope.markers.push(alert.location);
+            }
+        });
+
     });
     $scope.map = { 
         center: { 
@@ -128,27 +142,7 @@ app.controller('MapController', function ($scope, foodAlerts) {
     $scope.options = {
         scrollwheel: false,
         styles: styleArr
-    };
-    $scope.markers = [{
-        latitude: 40.7127,
-        longitude: -74.0059,
-        title: 'm1',
-        id: 1,
-        fit: true,
-        options: {
-            labelVisible: true
-        }
-      }, {
-        latitude: 40.754516, 
-        longitude: -73.994723,
-        title: 'm2',
-        id: 2,
-        fit: true,
-        options: {
-            labelVisible: true
-        }
-      }];
-    
+    };    
 });
 
 
