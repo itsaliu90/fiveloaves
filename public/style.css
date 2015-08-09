@@ -146,7 +146,7 @@ tutorial-section-menu {
       tutorial-section-menu ul li:hover {
         background: #f3f3f3; }
 
-#login-form {
+#login-form, #signup-form {
   width: 60%;
   margin: 0 auto; }
 

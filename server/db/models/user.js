@@ -11,45 +11,27 @@ var schema = new mongoose.Schema({
     password: {
         type: String
     },
+    name: {
+        type: String
+    },
     salt: {
         type: String
     },
     phone: {
         type: String
     },
-    preferredZipCodes: {
-        type: [String]
+    zipCode: {
+        type: String
     },
-    isOrganization: {
+    verified: {
         type: Boolean
     },
-
-    // Organization Fields (Optional)
-    organizationVerified: {
-        type: Boolean
-    },
-    organizationName: {
+    address: {
         type: String
     },
-    organizationAddress: {
+    city: {
         type: String
     },
-    organizationCity: {
-        type: String
-    },
-    organizationPhone: {
-        type: String
-    },
-    organizationZipCode: {
-        type: String
-    },
-    organizationTwitter: {
-        id: String,
-        username: String,
-        token: String,
-        tokenSecret: String
-    },
-
     // Extra
     twitter: {
         id: String,
@@ -64,14 +46,6 @@ var schema = new mongoose.Schema({
         id: String
     }
 });
-
-
-schema.statics.getUsersByPreferredZipCode = function(zipcode) {
-    return mongoose.model('User').find({ preferredZipCodes: zipcode}).exec()
-}
-
-
-
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
 // are all used for local authentication security.
@@ -103,8 +77,5 @@ schema.statics.encryptPassword = encryptPassword;
 schema.method('correctPassword', function (candidatePassword) {
     return encryptPassword(candidatePassword, this.salt) === this.password;
 });
-
-
-
 
 mongoose.model('User', schema);
