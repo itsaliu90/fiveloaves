@@ -107,16 +107,31 @@ app.controller('MapController', function ($scope, foodAlerts) {
         },
         {}
     ];
+    address: "500 7th Ave"
+    city: "New York"
+    description: "More free food Y'all!!!!"
+    organizationName: "Alley NYC"
+    time: "2015-08-09T05:26:36.378Z"
+    zipCode: “10018”
+    
     $scope.alerts = foodAlerts;
-    console.log('hi', $scope.alerts);
+    var markers = [];
     var geocoder = new google.maps.Geocoder();
-    $scope.address = "500 7th Ave 10018";
-    geocoder.geocode( { "address": $scope.address }, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
-            var location = results[0].geometry.location;
-            console.log(location);
-        }
+    $scope.alerts.forEach(function(alert, index) {
+        var address = alert.address + " " + alert.zipCode;
+        geocoder.geocode( { "address": address }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+                var location = results[0].geometry.location;
+                alert.location = {
+                    latitude: location.G,
+                    longitude: location.K
+                }
+                markers.push(alert.location);
+            }
+        });
+
     });
+
     $scope.map = { 
         center: { 
             latitude: 40.741660,
@@ -129,25 +144,27 @@ app.controller('MapController', function ($scope, foodAlerts) {
         scrollwheel: false,
         styles: styleArr
     };
-    $scope.markers = [{
-        latitude: 40.7127,
-        longitude: -74.0059,
-        title: 'm1',
-        id: 1,
-        fit: true,
-        options: {
-            labelVisible: true
-        }
-      }, {
-        latitude: 40.754516, 
-        longitude: -73.994723,
-        title: 'm2',
-        id: 2,
-        fit: true,
-        options: {
-            labelVisible: true
-        }
-      }];
+    $scope.markers = markers;
+    console.log($scope.markers);
+    // $scope.markers = [{
+    //     latitude: 40.7127,
+    //     longitude: -74.0059,
+    //     title: 'm1',
+    //     id: 1,
+    //     fit: true,
+    //     options: {
+    //         labelVisible: true
+    //     }
+    //   }, {
+    //     latitude: 40.754516, 
+    //     longitude: -73.994723,
+    //     title: 'm2',
+    //     id: 2,
+    //     fit: true,
+    //     options: {
+    //         labelVisible: true
+    //     }
+    //   }];
     
 });
 

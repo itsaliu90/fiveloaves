@@ -164,7 +164,8 @@ tutorial-section-menu {
   height: calc(100vh - 71px);
   top: 71px;
   right: 0;
-  background: white; }
+  background: white;
+  padding: 20px; }
   #results .tab {
     position: absolute;
     z-index: 249;
@@ -173,3 +174,6 @@ tutorial-section-menu {
     left: -29px;
     top: 0;
     background: url(images/tab.png) no-repeat top left; }
+  #results ul, #results li {
+    margin: 0;
+    padding: 0; }
