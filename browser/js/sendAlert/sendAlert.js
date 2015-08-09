@@ -2,7 +2,7 @@ app.config(function ($stateProvider) {
 
     $stateProvider.state('sendAlert', {
         url: '/sendAlert',
-        template: 'js/sendAlert/sendAlert.html',
+        templateUrl: 'js/sendAlert/sendAlert.html',
         controller: 'SendAlertCtrl',
         data: {
             authenticate: true
@@ -24,6 +24,8 @@ app.factory('SendAlertFactory', function ($http) {
 
 app.controller('SendAlertCtrl', function ($scope, AuthService, $state, SendAlertFactory) {
 
+
+    console.log("IM HERE!!!!");
     $scope.alertInfo = {};
     $scope.error = null;
 
@@ -32,7 +34,7 @@ app.controller('SendAlertCtrl', function ($scope, AuthService, $state, SendAlert
         $scope.error = null;
 
         SendAlertFactory.sendAlert(alertInfo)
-            .then(function(user) {
+            .then(function() {
                 $state.go('home');  
             }).catch(function(err) {
                 $scope.error = 'Alert form not completed/filled correctly!';
