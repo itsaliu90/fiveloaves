@@ -127,6 +127,7 @@ app.controller('MapController', function ($scope, foodAlerts) {
                     }
                 }
                 $scope.markers.push(alert.location);
+                console.log($scope.markers);
             }
         });
 

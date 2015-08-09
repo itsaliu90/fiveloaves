@@ -32,12 +32,8 @@ var schema = new mongoose.Schema({
     city: {
         type: String
     },
-    // Extra
     twitter: {
-        id: String,
-        username: String,
-        token: String,
-        tokenSecret: String
+        type: String
     },
     facebook: {
         id: String
