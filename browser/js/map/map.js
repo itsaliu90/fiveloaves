@@ -2,10 +2,18 @@ app.config(function ($stateProvider) {
     $stateProvider.state('map', {
         url: '/map',
         controller: 'MapController',
-        templateUrl: 'js/map/map.html'
+        templateUrl: 'js/map/map.html',
+        resolve: {
+            foodAlerts: function(FiveLoaves) {
+                return FiveLoaves.getAll()
+                            .catch(function (err) {
+                                console.log(err);
+                            });
+            }
+        }
     });
 });
-app.controller('MapController', function ($scope) {
+app.controller('MapController', function ($scope, foodAlerts) {
     var styleArr = [
         {
             "featureType": "landscape",
@@ -100,10 +108,20 @@ app.controller('MapController', function ($scope) {
         },
         {}
     ];
+    $scope.alerts = foodAlerts;
+    console.log($scope.alerts);
+    var geocoder = new google.maps.Geocoder();
+    $scope.address = "500 7th Ave 10018";
+    geocoder.geocode( { "address": $scope.address }, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+            var location = results[0].geometry.location;
+            console.log(location);
+        }
+    });
     $scope.map = { 
         center: { 
-            latitude: 40.7127,
-            longitude: -74.0059 
+            latitude: 40.741660,
+            longitude: -73.955062
         }, 
         zoom: 13,
         bounds: {}
@@ -112,7 +130,7 @@ app.controller('MapController', function ($scope) {
         scrollwheel: false,
         styles: styleArr
     };
-    $scope.randomMarkers = [{
+    $scope.markers = [{
         latitude: 40.7127,
         longitude: -74.0059,
         title: 'm1',

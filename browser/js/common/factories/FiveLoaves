@@ -1,0 +1,9 @@
+app.factory('FiveLoaves', function () {
+    var getAll = function() {
+        return $http
+            .get('/post')
+            .then(function (response) {
+                return response.data;
+            });
+    };
+});

@@ -150,9 +150,26 @@ tutorial-section-menu {
   width: 60%;
   margin: 0 auto; }
 
-.angular-google-map-container {
+#map .angular-google-map-container {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 100%;
   height: 100%; }
+
+#results {
+  position: absolute;
+  z-index: 250;
+  width: 350px;
+  height: calc(100vh - 71px);
+  top: 71px;
+  right: 0;
+  background: white; }
+  #results .tab {
+    position: absolute;
+    z-index: 249;
+    width: 52px;
+    height: 100px;
+    left: -29px;
+    top: 0;
+    background: url(images/tab.png) no-repeat top left; }

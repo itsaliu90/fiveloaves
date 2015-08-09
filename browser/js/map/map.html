@@ -1,6 +1,17 @@
 <div id="map">
     <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
-        <ui-gmap-markers models="randomMarkers" coords="'self'" icon="'icon'">
+        <ui-gmap-markers models="markers" coords="'self'" icon="'icon'">
         </ui-gmap-markers>
     </ui-gmap-google-map>
+
+    <div id="results">
+        <div class="tab" ng-class="tabIn"></div>
+        <ul>
+            <li ng-repeat="r in markers">
+                <span class="company">{{ r.company }}</span>
+                <span class="address">{{ r.address }}</span>
+            </li>
+        </ul>
+    </div>
+
 </div>
