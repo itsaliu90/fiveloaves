@@ -1,5 +1,12 @@
-#login-form,
-#signup-form {
-  width: 60%;
-  margin: 0 auto;
+#signup-form,
+#signin-form,
+#alert-form {
+    padding: 40px;
+    background: rgba(255,255,255,.9);
+    border-radius: 6px;
+    margin-bottom: 80px;
+}
+.form-heading {
+    margin-top: 0;
+    margin-bottom: 40px;
 }

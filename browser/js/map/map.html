@@ -10,7 +10,8 @@
         <ul>
             <li ng-repeat="a in alerts">
                 <span class="company">{{ a.organizationName }}</span>
-                <span class="address">{{ a.address }}</span>
+                <span class="address">{{ a.address }}</span><br />
+                <span class="time">{{ a.time | date : 'h:m a' }}</span>
                 <span class="description">{{ a.description }}</span>
             </li>
         </ul>
