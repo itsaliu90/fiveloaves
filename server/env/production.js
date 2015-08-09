@@ -10,10 +10,12 @@ module.exports = {
     "DATABASE_URI": process.env.MONGOLAB_URI,
     "SESSION_SECRET": process.env.SESSION_SECRET,
     "TWITTER": {
-        "consumerKey": process.env.TWITTER_CONSUMER_KEY,
-        "consumerSecret": process.env.TWITTER_CONSUMER_SECRET,
-        "callbackUrl": process.env.TWITTER_CALLBACK
-    },
+        "consumerKey": "tpyipc7QPzArOxWfhcrDrSxR5",
+        "consumerSecret": "tSuegleg1rRC6jDjVk8ermvZheHskJhpXLMCXNMry5UUlOlfvs",
+        "access_token_key": '3410409694-slrWj6vVGfUXF86iPJX8JJ1QyGxnyix4JaW8VxU',
+        "access_token_secret": '8qPJwr9UdItizLx7HyYvKoIRhtmJ8JoKDMgX4odV1ZROb'
+        "callbackUrl": "INSERT_TWITTER_CALLBACK_HERE"
+      },
     "FACEBOOK": {
         "clientID": process.env.FACEBOOK_APP_ID,
         "clientSecret": process.env.FACEBOOK_CLIENT_SECRET,

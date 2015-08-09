@@ -2,8 +2,10 @@ module.exports = {
   "DATABASE_URI": "mongodb://localhost:27017/fiveloaves",
   "SESSION_SECRET": "Optimus Prime is my real dad",
   "TWITTER": {
-    "consumerKey": "INSERT_TWITTER_CONSUMER_KEY_HERE",
-    "consumerSecret": "INSERT_TWITTER_CONSUMER_SECRET_HERE",
+    "consumerKey": "tpyipc7QPzArOxWfhcrDrSxR5",
+    "consumerSecret": "tSuegleg1rRC6jDjVk8ermvZheHskJhpXLMCXNMry5UUlOlfvs",
+    "access_token_key": '3410409694-slrWj6vVGfUXF86iPJX8JJ1QyGxnyix4JaW8VxU',
+    "access_token_secret": '8qPJwr9UdItizLx7HyYvKoIRhtmJ8JoKDMgX4odV1ZROb',
     "callbackUrl": "INSERT_TWITTER_CALLBACK_HERE"
   },
   "FACEBOOK": {

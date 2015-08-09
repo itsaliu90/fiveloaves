@@ -12,7 +12,7 @@
     position: absolute;
     z-index: 250;
     max-width: 350px;
-    height: calc(100vh - 71px);
+    max-height: calc(100vh - 71px);
     top: 71px;
     right: 0;
     background: white;
@@ -20,18 +20,29 @@
 
     .tab {
         position: absolute;
-        z-index: 249;
+        z-index: 250;
         width: 52px;
         height: 100px;
         left: -29px;
         top: 0;
         background: url(images/tab.png) no-repeat top left;
     }
-
+    .overflowY {
+        position: relative;
+        top: 0;
+        right: 0;
+        width: 100%;
+        max-height: calc(100vh - 96px);
+        overflow-y: scroll;
+        overflow-x: visible;
+    }
     ul, li {
         margin: 0;
         padding: 0;
         list-style-type: none;
+    }
+    ul {
+        padding-top: 66px;
     }
     li {
         border-bottom: 1px solid #eee;
@@ -50,6 +61,12 @@
         color: #8fa15f;
         margin-top: 0;
         margin-bottom: 30px;
+        position: fixed;
+        z-index: 251;
+        background: white;
+        margin: -25px -25px 0 -25px;
+        padding: 25px;
+        width: 100%;
     }
     .description {
         color: #898989;
