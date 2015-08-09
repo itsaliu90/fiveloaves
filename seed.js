@@ -5,6 +5,7 @@ var chalk = require('chalk');
 var connectToDb = require('./server/db');
 var User = Promise.promisifyAll(mongoose.model('User'));
 var Registrant = Promise.promisifyAll(mongoose.model('Registrant'));
+var Post = Promise.promisifyAll(mongoose.model('Post'));
 
 var seedUsers = function () {
 
@@ -68,7 +69,7 @@ var seed = function () {
 };
 
 var wipeDB = function () {
-    var models = [User, Registrant];
+    var models = [User, Registrant, Post];
 
     models.forEach(function (model) {
         model.find({}).remove(function () {});
