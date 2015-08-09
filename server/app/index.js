@@ -4,15 +4,10 @@ var express = require('express');
 var app = express();
 var secrets = require('../../secrets.js');
 var mongoose = require('mongoose');
-var paypal = require('paypal-rest-sdk');
+
 module.exports = app;
 
-// Configure PayPal
-paypal.configure({
-  'mode': 'sandbox', //sandbox or live
-  'client_id': secrets.payPalClientId,
-  'client_secret': secrets.payPalClientSecret
-});
+
 
 // Mongoose models
 var User = mongoose.model('User');
@@ -44,58 +39,6 @@ app.use(function (req, res, next) {
 
 });
 
-
-app.get('/paypal', function (req, res) {
-
-	console.log("HITTING PAYPAL ROUTE");
-
-	var create_payment_json = {
-	    "intent": "sale",
-	    "payer": {
-	        "payment_method": "credit_card",
-	        "funding_instruments": [{
-	            "credit_card": {
-	                "type": "visa",
-	                "number": "4417119669820331",
-	                "expire_month": "11",
-	                "expire_year": "2018",
-	                "cvv2": "874",
-	                "first_name": "Joe",
-	                "last_name": "Shopper",
-	                "billing_address": {
-	                    "line1": "52 N Main ST",
-	                    "city": "Johnstown",
-	                    "state": "OH",
-	                    "postal_code": "43210",
-	                    "country_code": "US"
-	                }
-	            }
-	        }]
-	    },
-	    "transactions": [{
-	        "amount": {
-	            "total": "7",
-	            "currency": "USD",
-	            "details": {
-	                "subtotal": "5",
-	                "tax": "1",
-	                "shipping": "1"
-	            }
-	        },
-	        "description": "This is the payment transaction description."
-	    }]
-	};
-
-	paypal.payment.create(create_payment_json, function (error, payment) {
-	    if (error) {
-	        throw error;
-	    } else {
-	        console.log("Create Payment Response");
-	        console.log(payment);
-	    }
-	});
-
-})
 
 app.get('/', function (req, res) {
     res.sendFile(app.get('indexHTMLPath'));
