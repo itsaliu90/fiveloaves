@@ -4,7 +4,8 @@ module.exports = router;
 
 router.use('/members', require('./members'));
 router.use('/users', require('./users'));
-router.use('/twilio', require('./twilio'))
+router.use('/twilio', require('./twilio'));
+router.use('/post', require('./post'));
 
 // Make sure this is after all of
 // the registered routes!

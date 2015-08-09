@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-offset-4 col-md-4">
         
-        <form id="alert-form" name="sendAlert" ng-submit="alertInfo.$valid && sendAlert(alertInfo)">
+        <form id="alert-form" name="sendAlertForm" ng-submit="sendAlert(alertInfo)" novalidate>
             <h1 class="form-heading text-center">Notify recipients to pick up food</h1>
 
             <alert type="danger" ng-show="error">
@@ -9,9 +9,15 @@
             </alert>
 
             <div class="form-group">
-                <label for="alert-description">Description</label><i class="bar"></i>
+                <label for="alert-description">Description of food</label><i class="bar"></i>
                 <textarea type="text" class="form-control" rows="10" cols="50" ng-model="alertInfo.description" id="description" required></textarea>
             </div>
+
+            <!-- <div class="note-image">
+                <img class="note-modal-img" ng-repeat='image in note.images' ng-src='{{image}}'>
+            </div> -->
+
+            <button class="btn btn-default pull-left" ng-click="addImage()">Add Media</button>
 
             <button type="submit" class="btn btn-primary btn-large btn-center">Send Alert</button>
         </form>
