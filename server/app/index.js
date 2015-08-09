@@ -8,12 +8,13 @@ var secrets = require('../../secrets.js');
 var mongoose = require('mongoose');
 
 // Mongoose models
-var Organization = mongoose.model('Organization');
+// var Organization = mongoose.model('Organization');
 var User = mongoose.model('User');
+var Registrant = mongoose.model('Registrant');
 var Post = mongoose.model('Post');
 
 // Twilio SMS function
-function sendSMSforPost(recipientPhoneNumber, postDescription) {
+var sendSMSforPost = function(recipientPhoneNumber, postDescription) {
 	var accountSid = 'ACd2695be19b1e72ebf889d3e9486724cc';
 	var authToken = secrets.twilioAuthToken;
 	var client = require('twilio')(accountSid, authToken);
@@ -57,32 +58,34 @@ app.use(function (req, res, next) {
 
 
 app.get('/zipcode', function (req, res) {
-    User.getUsersByPreferredZipCode('10018')
+    Registrant.getRegistrantsByZipCode('10018')
         .then(function(users){
             res.json(users)
         })
 })
 
-app.get('/post', function (req, res) {
-    var post = new Post({
-    	organization: "55c6899e9d0074e0698628ee",
-    	description: "Ice cream is here!!!"
-    })
 
-    // Query Organization related to Post based on ID
-    Organization.find({_id: post.organization})
-    // Query Users based on Organization zip code
-    .then(function(organization){
-    	User.getUsersByPreferredZipCode(organization[0].zipCode)
-    	.then(function(users) {
-    // Iterate through users and send texts, passing in To, Description (Post), Location (Organization)
-    		for (var i = 0; i < users.length; i++) {
-    			console.log("CURRENT USER", users[i]);
-    			sendSMSforPost(users[i].phone, post.description + organization[0].address);
-    		}
-        })
-    })
-})
+
+// app.get('/post', function (req, res) {
+//     var post = new Post({
+//     	organization: "55c6899e9d0074e0698628ee",
+//     	description: "Ice cream is here!!!"
+//     })
+
+//     // Query Organization related to Post based on ID
+//     Organization.find({_id: post.organization})
+//     // Query Users based on Organization zip code
+//     .then(function(organization){
+//     	User.getUsersByPreferredZipCode(organization[0].zipCode)
+//     	.then(function(users) {
+//     // Iterate through users and send texts, passing in To, Description (Post), Location (Organization)
+//     		for (var i = 0; i < users.length; i++) {
+//     			console.log("CURRENT USER", users[i]);
+//     			sendSMSforPost(users[i].phone, post.description + organization[0].address);
+//     		}
+//         })
+//     })
+// })
 
 app.get('/', function (req, res) {
     res.sendFile(app.get('indexHTMLPath'));

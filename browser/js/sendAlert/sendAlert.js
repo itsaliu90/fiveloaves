@@ -3,7 +3,7 @@ app.config(function ($stateProvider) {
     $stateProvider.state('sendAlert', {
         url: '/sendAlert',
         template: 'js/sendAlert/sendAlert.html',
-        controller: 'SendAlertCtrl'
+        controller: 'SendAlertCtrl',
         data: {
             authenticate: true
         }
@@ -18,7 +18,7 @@ app.factory('SendAlertFactory', function ($http) {
                 return $http.post('/api/post').then(function (response) {
                     return response.data;
                 });
-            };
+            }
     }
 });
 
