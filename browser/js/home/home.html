@@ -3,7 +3,8 @@
 </section>
 
 
-<input id="paypal" type="image" src="./images/btn_donate_pp.png">
+<!-- <input id="paypal" type="button" src="./paypal-button.min.js"> -->
+
 
 <script src="./paypal-button.min.js"
     data-button="donate"
@@ -12,3 +13,33 @@
     async
 ></script>
 
+
+
+
+<div ng-controller="ModalDemoCtrl">
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title" style="text-align: center">Thank you for donating to fiveloaves</h3>
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group" style="padding-right: 70px; padding-left: 70px">
+                <label for="signup-name">Name</label><i class="bar"></i>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="form-group" style="padding-right: 70px; padding-left: 70px">
+                <label for="signup-name">Amount</label><i class="bar"></i>
+                <input type="text" class="form-control" id="data-amount" placeholder="$" required>
+            </div>
+            
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">Donate</button>
+            <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+    <input id="paypal" type="button" ng-click="open()"></input>
+
+    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+</div>
