@@ -10,35 +10,11 @@ app.config(function ($stateProvider) {
     });
 
 });
-
-app.factory('SendAlertFactory', function ($http) {
-
-    return {
-        sendAlert: function (description, organization, picURL) {
-
-                var postObj = {
-                    description: description,
-                    organizationID: organization._id,
-                    organizationName: organization.name,
-                    zipCode: organization.zipCode,
-                    address: organization.address,
-                    city: organization.city,
-                    pictureUrl: picURL
-                };
-
-                return $http.post('/api/post', postObj).then(function (response) {
-                    return response.data;
-                });
-            }
-    }
-});
-
 app.controller('SendAlertCtrl', function ($scope, AuthService, $state, SendAlertFactory) {
 
     $scope.alertInfo = {
         description: ''
     };
-
     // filepicker.setKey("AYlHStA5UQh6tbkyxrBNfz");
     
     // $scope.addMedia = function() {
@@ -69,7 +45,6 @@ app.controller('SendAlertCtrl', function ($scope, AuthService, $state, SendAlert
     //         }
     //     );
     // };
-
     $scope.error = null;
     $scope.picURL;
 
@@ -84,7 +59,7 @@ app.controller('SendAlertCtrl', function ($scope, AuthService, $state, SendAlert
         AuthService.getLoggedInUser().then(function(user) {
             return SendAlertFactory.sendAlert(alertInfo.description, user, $scope.picURL);
         }).then(function() {
-            $state.go('home');  
+            $state.go('map');  
         }).catch(function(err) {
             $scope.error = 'Alert form not completed/filled correctly!';
             console.error(err);

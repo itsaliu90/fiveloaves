@@ -7,14 +7,16 @@
     <div id="results">
         <div class="tab" ng-class="tabIn"></div>
         <h3 class="date">{{ now | date : 'MMM, d' }}</h3>
+        <div class="overflowY">
         <ul>
-            <li ng-repeat="a in alerts">
+            <li ng-repeat="a in alerts | orderBy:'-time':false">
                 <span class="company">{{ a.organizationName }}</span>
                 <span class="address">{{ a.address }}</span><br />
                 <span class="time">{{ a.time | date : 'h:m a' }}</span>
                 <span class="description">{{ a.description }}</span>
             </li>
         </ul>
+        </div>
     </div>
 
 </div>

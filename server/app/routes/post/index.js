@@ -4,8 +4,16 @@ var mongoose = require('mongoose');
 var secrets = require('../../../../secrets.js');
 var Post = mongoose.model('Post');
 var Registrant = mongoose.model('Registrant');
+var Twitter = require('twitter');
 var moment = require('moment');
 moment().format();
+
+var client = new Twitter({
+  consumer_key: 'tpyipc7QPzArOxWfhcrDrSxR5',
+  consumer_secret: 'tSuegleg1rRC6jDjVk8ermvZheHskJhpXLMCXNMry5UUlOlfvs',
+  access_token_key: '3410409694-slrWj6vVGfUXF86iPJX8JJ1QyGxnyix4JaW8VxU',
+  access_token_secret: '8qPJwr9UdItizLx7HyYvKoIRhtmJ8JoKDMgX4odV1ZROb',
+});
 
 // Helper method to send SMS
 var sendSMS = function(recipientPhoneNumber, postDescription) {
@@ -51,6 +59,11 @@ router.post('/', function(req, res, next) {
 			for (var i = 0; i < registrants.length; i++) {
 				sendSMS(registrants[i].phone, message);
 			}
+			var org = '#' + req.body.organizationName; 
+			var status = 'Thank you ' + org + ' for using #fiveloaves to donate your food! #nyc';
+			client.post('statuses/update', {status: status},  function(error, tweet, response){
+				if(error) console.log('hello', error.body);
+			});
 
 			res.json(registrants);
 		})
