@@ -11,7 +11,7 @@ body {
   background: #fdfdfd; }
 
 #main {
-  padding-top: 60px;
+  padding-top: 120px;
   width: 100%;
   height: 100%;
   background: url(/images/home.jpg) no-repeat center center;
@@ -29,7 +29,7 @@ fullstack-logo {
 
 navbar {
   display: block;
-  background: rgba(143, 161, 95, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   position: relative;
   z-index: 120; }
   navbar .container {
@@ -150,11 +150,9 @@ tutorial-section-menu {
   width: 60%;
   margin: 0 auto; }
 
-#map {
+.angular-google-map-container {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 100%; }
-
-.leaflet-control-container div:nth-child(2) {
-  display: none; }
+  width: 100%;
+  height: 100%; }
