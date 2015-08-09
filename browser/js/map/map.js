@@ -5,8 +5,7 @@ app.config(function ($stateProvider) {
         templateUrl: 'js/map/map.html',
         resolve: {
             foodAlerts: function(FiveLoaves) {
-                return FiveLoaves.getAll()
-                            .catch(function (err) {
+                return FiveLoaves.getAll().catch(function (err) {
                                 console.log(err);
                             });
             }
@@ -109,7 +108,7 @@ app.controller('MapController', function ($scope, foodAlerts) {
         {}
     ];
     $scope.alerts = foodAlerts;
-    console.log($scope.alerts);
+    console.log('hi', $scope.alerts);
     var geocoder = new google.maps.Geocoder();
     $scope.address = "500 7th Ave 10018";
     geocoder.geocode( { "address": $scope.address }, function(results, status) {
