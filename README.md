@@ -4,4 +4,4 @@ fiveloaves allows hungry individuals to receive SMS alerts whenever an organizat
 
 Built with:
 * NodeJS, ExpressJS, AngularJS, and MongoDB
-* Twillio API
+* Twilio API
